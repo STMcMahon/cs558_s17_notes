@@ -1,0 +1,129 @@
+---
+layout: notes
+title: Web Security
+scribe: Sean Moniz-McMahon
+---
+
+
+Presentation: WhatsApp
+
+- Founded in 2009, acquired by
+	Facebook in 2014 
+- Vulnerability found in 2016 
+- Utilizes a key exchange between
+	two users facilitated by the WhatsApp server 
+- Vulnerability: 
+    - Eve is able to register a SS7
+		Hub, which acts like a base station/tower, and send a message to
+		the GSM tower with Bob's number whilst Bob is offline, which gives
+		her the information she needs to register an account as if she were
+		Bob with WhatsApp 
+    - Eve will receive a new public
+		key, and messages that failed to send from Alice to Bob will be
+		resent, except they will be sent to Eve's public key instead of
+		Bob's. 
+		 
+    - Important to note that this
+		vulnerability will not allow Eve to see messages already
+		successfully sent from Alice to Bob. 
+
+Lecture: Web Security
+
+- HTTPS messages are encrypted over
+	TLS, whilst HTTP messages are unencrypted. 
+- Three different types of
+	adversaries 
+    - MITM(Man-In-The-Middle) 
+        - Can eavesdrop, change traffic,
+			and send messages. 
+        - The strongest situation for the
+			adversary to be in. 
+        - Hardest to protect against. 
+
+    - On-Path 
+        - Can eavesdrop and send messages,
+			however they cannot modify or drop in traffic 
+        - Example: Having a tap on a
+			fiber-optic cable whilst being capable of sending machines from a
+			remote computer connected to the internet 
+
+    - Off-Path or Remote Adversary 
+        - Cannot eavesdrop or modify/drop
+			in traffic; Can only send messages 
+        - Essentially an adversary who has
+			a personal machine/server connected to the internet such that they
+			can send messages out 
+        - Weakest adversary 
+
+- URLs 
+    - Global ID of network-retrievable
+		documents 
+    - Structure: Protocol(HTTP) -&gt;
+		Host Name(bu.edu)-&gt;Port-&gt;Path(Actual file/page being pulled
+		out)-&gt;Query-&gt;Fragment 
+    - '?' character indicates a query 
+
+- HTTP Request 
+    - Get request leaks a lot of
+		information regarding the user 
+        - Referrer[How user arrived at
+			site] 
+        - User-Agent[Browser of user] 
+
+    - Can be used to “fingerprint”
+		users 
+    - When a Get request is processed a
+		status messages will be output (i.e '404' for a failed request) 
+
+- HTML 
+    - From simplistic text-formatting
+		to actual “events” (Ex: pop-ups on mouse click) 
+    - “New” way of HTML utilizes
+		DOM (Document Object Model) 
+        - Allows for more dynamic HTML
+			code (Variables/If statements) 
+
+- Image Tags 
+    - Can embed images from other
+		places on the internet on a page 
+    - Query's both current web page as
+		well as server of embedded image 
+    - Can be exploited through “Single
+		Pixel Tracking” 
+        - Relatively tiny embedded image
+			to a server for the purposes of tracking user-information. 
+
+- Cookies 
+    - Used to store server state
+		information on the user's machine 
+    - Servers will configure cookies to
+		send to the user, such as after a successful log in, to avoid
+		having to store unnecessary amounts of state information in their
+		memory 
+    - Set Cookie: 
+        - Name=VALUE 
+        - Domain=(Who can read the
+			cookies) 
+        - Expires=(When cookie expires) 
+        - Secure=(Whether cookie can only
+			be sent via encryption) 
+
+    - Cookies sent over HTTP are bad as
+		they are unencrypted, therefore able to be read by any adversary
+		who is “on path” 
+
+- Cross-Site Scripting (XXS) 
+    - Javascript 
+        - Powerful web-page programming
+			language 
+
+    - Same Origin Policy 
+        - Browser associates certain
+			elements with a given origin 
+        - Only scripts with same origin
+			should be able to view these elements 
+        - Library import, however, is
+			excluded from the SOP	 
+            - Shouldn't be an issue unless
+				scripts from a malicious website somehow are embedded on another
+				website
